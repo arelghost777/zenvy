@@ -5,7 +5,7 @@ import { MapPinOff, ArrowLeft } from 'lucide-vue-next'
 
 <template>
   <div class="min-h-[80vh] flex items-center justify-center px-6">
-    <div class="text-center space-y-8 max-w-md animate-in fade-in zoom-in duration-700">
+    <div class="text-center space-y-7 max-w-md animate-in fade-in zoom-in duration-700">
       
       <div class="relative inline-block">
         <div class="size-32 bg-gray-50 rounded-[40px] flex items-center justify-center mx-auto shadow-inner border border-gray-100">
