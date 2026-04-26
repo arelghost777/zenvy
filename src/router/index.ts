@@ -12,18 +12,20 @@ import Events from '@/views/Dashboard/Events.vue'
 import UpdateEvent from '@/views/Dashboard/UpdateEvent.vue'
 import Account from '@/views/Dashboard/Account.vue'
 import NotFound from '@/views/NotFound.vue'
+import Home from '@/views/Public/Home.vue'
+import EventDetails from '@/views/Public/EventDetails.vue'
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
   {
     path: '/',
     name: 'Accueil',
-    component: import('@/views/Public/Home.vue'),
+    component: Home,
   },
   {
     path: '/events/:eventId',
     name: 'Détails de l\'évenement',
-    component: import('@/views/Public/EventDetails.vue'),
+    component: EventDetails,
   },
 
   // --- ROUTES AUTHENTIFICATION (Layout dédié) ---
