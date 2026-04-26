@@ -11,6 +11,7 @@ import ImpressionBillets from '@/views/Dashboard/ImpressionBillets.vue'
 import Events from '@/views/Dashboard/Events.vue'
 import UpdateEvent from '@/views/Dashboard/UpdateEvent.vue'
 import Account from '@/views/Dashboard/Account.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
@@ -85,7 +86,12 @@ const routes = [
   },
 
   // Redirection par défaut si la page n'existe pas
-  { path: '/:pathMatch(.*)*', redirect: '/' }
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: { title: 'Page introuvable | Zenvy' }
+  }
 ]
 
 const router = createRouter({
