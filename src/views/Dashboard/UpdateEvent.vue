@@ -11,8 +11,6 @@ import { Button } from '@/components/ui/button'
 import { Input }  from '@/components/ui/input'
 import { Badge }  from '@/components/ui/badge'
 import type { EventType } from '@/types/eventTypes'
-import { useEventStore } from '@/stores/useEventStore'
-import { storeToRefs } from 'pinia'
 
 // ─── Référentiels ──────────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -81,9 +79,6 @@ const form = ref<Omit<EventType, 'id' | 'created_at' | 'updated_at'>>({
   dates:         [],
   ticket_types:  [],
 })
-
-const store  = useEventStore()
-
 
 // ─── Chargement via getEventById ───────────────────────────────────────────
 const loadEvent = async () => {

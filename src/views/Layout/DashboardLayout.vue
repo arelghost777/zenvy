@@ -11,9 +11,8 @@ import { Separator } from '@/components/ui/separator' // Ajout de l'import manqu
 import { ref, onMounted, computed } from 'vue';
 import { authService } from '@/helpers/AuthHelpers';
 import { useRouter, useRoute } from 'vue-router';
-import { 
-  GalleryVerticalEnd, Home, User2, ChevronUp, 
-  LogOut, Settings, CreditCard, Plus, Calendar, Ticket, 
+import {  Home, User2, ChevronUp, 
+  LogOut, Settings, Plus, Calendar, Ticket, 
   ChevronRight
 } from 'lucide-vue-next'
 

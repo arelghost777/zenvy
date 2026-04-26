@@ -96,7 +96,7 @@ const router = createRouter({
 /**
  * MIDDLEWARE DE PROTECTION DES ROUTES
  */
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
   // 1. Récupération de la session via le client Supabase
   const { data: { session } } = await supabase.auth.getSession()
   const isAuthenticated = !!session

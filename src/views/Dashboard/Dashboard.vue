@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   Plus, TrendingUp, Ticket, CalendarDays, ArrowUpRight,
-  ArrowRight, Eye, Users, BarChart3, Zap, Clock,
+  ArrowRight, Eye, BarChart3, Zap, Clock,
   CheckCircle2, AlertCircle, Archive, Globe, MapPin,
   ChevronRight, LayoutDashboard
 } from 'lucide-vue-next'

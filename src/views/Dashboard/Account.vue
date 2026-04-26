@@ -6,7 +6,6 @@ import {
   User, 
   Mail, 
   Lock, 
-  LogOut, 
   Camera, 
   Loader2, 
   CheckCircle2,
@@ -31,15 +30,6 @@ onMounted(async () => {
   }
   isLoading.value = false
 })
-
-const handleSignOut = async () => {
-  try {
-    await authService.signOut()
-    router.push('/login')
-  } catch (error) {
-    console.error("Erreur de déconnexion", error)
-  }
-}
 
 const handleResetPassword = async () => {
   if (!user.value?.email) return

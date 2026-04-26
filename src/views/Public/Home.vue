@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import {
-  Search, SlidersHorizontal, Users, Bell, Heart,
+  Search,
   Menu, User, MapPin, Globe, Facebook, Instagram, Linkedin,
   Music, Theater, GraduationCap, Wine, Mountain, Dumbbell,
   Tent, Atom, ChevronRight, Church, Briefcase, Tag, Utensils,

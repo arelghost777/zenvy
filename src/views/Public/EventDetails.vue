@@ -5,7 +5,7 @@ import { eventService } from '@/services/eventService'
 import type { EventType } from '@/types/eventTypes'
 import { 
   Calendar, MapPin, Share2, Info, CheckCircle, 
-  Minus, Plus, Ticket, ChevronLeft, Loader2 
+  Minus, Plus, ChevronLeft, Loader2 
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { Ticket, ChevronLeft } from 'lucide-vue-next'
+import { ChevronLeft } from 'lucide-vue-next'
 
 const router = useRouter()
 </script>
