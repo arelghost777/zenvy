@@ -136,7 +136,7 @@ const catColor = (name: string) => CAT_COLORS[name] ?? '#94A3B8'
             <span>Tableau de bord</span>
           </div>
           <h3 class="text-3xl font-bold text-slate-900 tracking-tight">
-            {{ greeting }}, <span class="text-[#EF233C]">{{ firstName }}</span> 👋
+            {{ greeting }}, <span class="text-[#EF233C]">{{ firstName }}</span>
           </h3>
           <p class="text-sm text-slate-400 mt-1 capitalize">{{ today }}</p>
         </div>

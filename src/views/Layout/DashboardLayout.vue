@@ -134,13 +134,9 @@ const handleSignOut = async () => {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent side="top" class="w-[--radix-dropdown-menu-trigger-width] p-2 mb-2">
-                <DropdownMenuItem class="cursor-pointer">
+                <DropdownMenuItem @click="router.push('/dashboard/account')" class="cursor-pointer">
                   <Settings class="mr-2 size-4" />
                   <span>Mon Compte</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem class="cursor-pointer">
-                  <CreditCard class="mr-2 size-4" />
-                  <span>Mes Gains</span>
                 </DropdownMenuItem>
                 <Separator class="my-2" />
                 <DropdownMenuItem @click="handleSignOut" class="cursor-pointer text-danger focus:text-danger focus:bg-danger/10">

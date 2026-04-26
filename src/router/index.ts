@@ -10,6 +10,7 @@ import CreateEvents from '@/views/Dashboard/CreateEvents.vue'
 import ImpressionBillets from '@/views/Dashboard/ImpressionBillets.vue'
 import Events from '@/views/Dashboard/Events.vue'
 import UpdateEvent from '@/views/Dashboard/UpdateEvent.vue'
+import Account from '@/views/Dashboard/Account.vue'
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
@@ -54,6 +55,11 @@ const routes = [
         path: '/dashboard',
         name: 'Tableau de bord',
         component: TableauDeBord,
+      },
+      {
+        path: '/dashboard/account',
+        name: 'Mon compte',
+        component: Account,
       },
       {
         path: '/dashboard/create-event',
