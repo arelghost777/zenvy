@@ -53,7 +53,7 @@ const handleGoogleLogin = async () => {
     <div class="flex flex-col space-y-2 text-center md:text-left">
       <h1 class="text-3xl font-black tracking-tighter text-primary">Bon retour !</h1>
       <p class="text-sm text-gray-400 font-medium">
-        Entrez vos identifiants pour accéder à <span class="text-danger font-black">Zenvy</span>
+        Entrez vos identifiants pour accéder à <router-link to="/" class="text-danger font-black">Zenvy</router-link>
       </p>
     </div>
 

@@ -37,7 +37,7 @@ export const authService = {
           access_type: 'offline',
           prompt: 'consent',
         },
-        redirectTo: `${window.location.origin}/create-event`,
+        redirectTo: `${window.location.origin}/dashboard`,
       },
     })
     if (error) throw error

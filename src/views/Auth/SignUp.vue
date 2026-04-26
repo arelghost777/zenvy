@@ -76,24 +76,11 @@ const handleGoogleSignUp = async () => {
 
 <template>
   <div class="mx-auto flex w-full flex-col justify-center space-y-7 sm:w-[400px] transition-all duration-500">
-    
-    <div v-if="isSuccess" class="bg-white p-8 rounded-[32px] shadow-2xl border border-green-100 text-center animate-in fade-in zoom-in duration-500">
-      <div class="size-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-        <CheckCircle2 :size="40" />
-      </div>
-      <h2 class="text-2xl font-black text-primary mb-2">Vérifiez vos emails !</h2>
-      <p class="text-gray-500 text-sm leading-relaxed">
-        Un lien de confirmation a été envoyé à <br/>
-        <span class="font-bold text-primary">{{ formData.email }}</span>.
-      </p>
-      <Button variant="outline" class="mt-8 w-full" @click="isSuccess = false">Retour</Button>
-    </div>
-
-    <template v-else>
+    <div>
       <div class="flex flex-col space-y-2 text-center md:text-left">
         <h1 class="text-3xl font-black tracking-tighter text-primary">Créer un compte</h1>
         <p class="text-sm text-gray-400 font-medium">
-          Rejoignez <span class="text-danger font-black">Zenvy</span> et ne manquez plus aucun événement.
+          Rejoignez <router-link to="/" class="text-danger font-black">Zenvy</router-link> et ne manquez plus aucun événement.
         </p>
       </div>
 
@@ -107,7 +94,7 @@ const handleGoogleSignUp = async () => {
         variant="outline" 
         @click="handleGoogleSignUp"
         :disabled="isLoading"
-        class="w-full border-gray-100 bg-white hover:bg-gray-50 text-primary py-6 flex items-center justify-center gap-3 transition-all rounded-2xl shadow-sm"
+        class="w-full border-gray-100 bg-white hover:bg-gray-50 text-primary mb-2 py-6 flex items-center justify-center gap-3 transition-all rounded-2xl shadow-sm"
       >
         S'inscrire avec Google
       </Button>
@@ -119,7 +106,7 @@ const handleGoogleSignUp = async () => {
         </div>
       </div>
 
-      <form @submit.prevent="handleSignUp" class="grid gap-5">
+      <form @submit.prevent="handleSignUp" class="grid gap-5 mb-3">
         <div class="grid gap-2">
           <Label for="name" class="text-[11px] font-black uppercase text-primary/50 ml-1">Nom complet</Label>
           <Input id="name" v-model="formData.fullName" placeholder="John Doe" required class="rounded-xl h-12" />
@@ -182,14 +169,14 @@ const handleGoogleSignUp = async () => {
           class="w-full bg-primary hover:bg-primary/95 text-white font-black py-7 rounded-2xl shadow-xl shadow-primary/10 transition-all active:scale-[0.98]"
         >
           <Loader2 v-if="isLoading" class="mr-2 h-5 w-5 animate-spin" />
-          <span v-else>Créer mon compte premium</span>
+          <span v-else>Créer mon compte</span>
         </Button>
       </form>
 
-      <p class="text-center text-[12px] text-gray-400 font-medium">
+      <p class="text-center text-[12px] text-gray-400 font-medium m">
         Déjà membre ? 
         <router-link to="/login" class="text-primary font-black hover:text-danger transition-colors ml-1">Se connecter</router-link>
       </p>
-    </template>
+    </div>
   </div>
 </template>

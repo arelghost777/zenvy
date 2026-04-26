@@ -66,7 +66,7 @@ onMounted(fetchEvent)
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white p-6 rounded border border-[#2B2D42]/5 flex items-start gap-4">
+            <div class="bg-white p-6 rounded border border-[#2B2D42]/5 flex items-center gap-4">
               <div class="p-3 bg-[#EF233C]/10 rounded text-[#EF233C]"><Calendar :size="24" /></div>
                 <div>
                 <p class="text-[10px] font-black uppercase text-[#8D99AE] mb-2">Dates & Horaires</p>

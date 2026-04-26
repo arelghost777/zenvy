@@ -156,10 +156,10 @@ onMounted(loadEvents)
         <Calendar :size="48" />
       </div>
       <h3 class="text-xl font-bold text-primary">Aucun événement trouvé</h3>
-      <p class="text-primary mb-6">
+      <p class="text-primary mb-6 text-center">
         {{ searchQuery ? 'Aucun résultat pour votre recherche.' : 'Commencez par créer votre premier événement.' }}
       </p>
-      <Button v-if="!searchQuery" as-child variant="outline" class="border-danger text-danger hover:bg-danger/5">
+      <Button v-if="!searchQuery" as-child variant="outline" class="border-danger text-danger hover:bg-danger/5 mt-3">
         <router-link to="/dashboard/create-event">Créer maintenant</router-link>
       </Button>
     </div>

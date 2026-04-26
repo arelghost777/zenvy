@@ -126,7 +126,7 @@ const catColor = (name: string) => CAT_COLORS[name] ?? '#94A3B8'
       </div>
     </div>
 
-    <div v-else class="max-w-[1400px] mx-auto px-6 py-10 space-y-8">
+    <div v-else class="max-w-[1400px] mx-auto  space-y-8">
 
       <!-- ══ HEADER ══════════════════════════════════════════════════════ -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -471,7 +471,7 @@ const catColor = (name: string) => CAT_COLORS[name] ?? '#94A3B8'
       <!-- ══ FOOTER ══ -->
       <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-300 font-medium">
         <span>Données en temps réel · Supabase</span>
-        <span>TIKERAMA Dashboard · {{ new Date().getFullYear() }}</span>
+        <span>Zenvy Dashboard · {{ new Date().getFullYear() }}</span>
       </div>
 
     </div>

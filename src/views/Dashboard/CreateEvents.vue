@@ -107,7 +107,7 @@ const CURRENCIES = [
 /** Onglet actif dans le récapitulatif */
 const activeRecapTab = ref(1)
 const transitionDirection = ref<'forward' | 'backward'>('forward')
-const isSuccess = ref(true)
+const isSuccess = ref(false)
 
 // ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -164,7 +164,7 @@ async function onSubmit() {
 </script>
 
 <template>
-<div v-if="isSuccess" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#2B2D42]/20 backdrop-blur-sm animate-in fade-in duration-300">
+<div v-if="isSuccess" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#2B2D42]/20 backdrop-blur-sm animate-in fade-in duration-300">
   
   <div class="bg-white p-8 md:p-12 rounded-xl shadow-[0_20px_70px_rgba(0,0,0,0.15)] border border-white max-w-sm w-full text-center animate-in zoom-in duration-500">
     
@@ -190,7 +190,7 @@ async function onSubmit() {
   <!-- ══════════════════════════════════════════════════════════════════════
        CONTENEUR PRINCIPAL
   ══════════════════════════════════════════════════════════════════════════ -->
-  <div v-else class="w-full mx-auto pb-8 px-4">
+  <div v-else class="w-full mx-auto pb-8 ">
 
     <!-- En-tête -->
     <h1 class="font-bold mb-2" style="color: var(--color-primary)">

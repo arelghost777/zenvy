@@ -104,7 +104,7 @@ const handleSignOut = async () => {
 
               <SidebarMenuItem>
                 <SidebarMenuButton as-child>
-                  <router-link to="/dashboard/tickets"> <Ticket class="text-primary" />
+                  <router-link to="/dashboard/events/1/impression-billets"> <Ticket class="text-primary" />
                     <span>Billetterie & Ventes</span>
                   </router-link>
                 </SidebarMenuButton>
@@ -161,7 +161,7 @@ const handleSignOut = async () => {
         </div>
       </header>
       
-      <main class="flex flex-1 flex-col gap-6 p-6 bg-background/50">
+      <main class="flex flex-1 flex-col gap-6 p-6 min-md:p-6 bg-background/50">
         <router-view />
       </main>
     </SidebarInset>
