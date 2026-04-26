@@ -17,23 +17,16 @@ import EventDetails from '@/views/Public/EventDetails.vue'
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
-    {
+  {
     path: '/',
-    component: AuthLayout,
-    children: [
-      {
-        path: '/',
-        name: 'Accueil',
-        component: Home,
-      },
-      {
-        path: '/events/:eventId',
-        name: 'Détails de l\'évenement',
-        component: EventDetails,
-      },
-    ]
-    },
-      
+    name: 'Accueil',
+    component: Home,
+  },
+  {
+    path: '/events/:eventId',
+    name: 'Détails de l\'évenement',
+    component: EventDetails,
+  },
 
   // --- ROUTES AUTHENTIFICATION (Layout dédié) ---
   {
