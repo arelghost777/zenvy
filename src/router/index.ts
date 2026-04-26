@@ -14,19 +14,27 @@ import Account from '@/views/Dashboard/Account.vue'
 import NotFound from '@/views/NotFound.vue'
 import Home from '@/views/Public/Home.vue'
 import EventDetails from '@/views/Public/EventDetails.vue'
+import Layout from '@/views/Layout/Layout.vue'
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
-  {
+    {
     path: '/',
-    name: 'Accueil',
-    component: Home,
-  },
-  {
-    path: '/events/:eventId',
-    name: 'Détails de l\'évenement',
-    component: EventDetails,
-  },
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'Accueil',
+        component: Home,
+      },
+      {
+        path: '/events/:eventId',
+        name: 'Détails de l\'évenement',
+        component: EventDetails,
+      },
+    ]
+    },
+      
 
   // --- ROUTES AUTHENTIFICATION (Layout dédié) ---
   {

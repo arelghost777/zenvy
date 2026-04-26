@@ -11,8 +11,8 @@ const email = ref('')
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         
-        <div class="space-y-6">
-          <h2 class="text-2xl font-black text-white tracking-tighter">Zenvy.</h2>
+        <div class="flex flex-col gap-5">
+          <img src="/logo.png" alt="" width="100">
           <p class="text-sm leading-relaxed">
             L'expérience événementielle premium. Simplifiez la gestion, amplifiez l'impact.
           </p>
