@@ -7,43 +7,31 @@ import {
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Separator } from '@/components/ui/separator' // Ajout de l'import manquant
-import { ref, onMounted, computed } from 'vue';
-import { authService } from '@/helpers/AuthHelpers';
+import { Separator } from '@/components/ui/separator'
+import { onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import {  Home, User2, ChevronUp, 
-  LogOut, Settings, Plus, Calendar, Ticket, 
+import { useAuthStore } from '@/stores/authStore'; // 👈 1. Import du store Pinia
+import { 
+  Home, User2, ChevronUp, 
+  LogOut, Settings, Plus, Calendar, 
   ChevronRight
 } from 'lucide-vue-next'
 
 const router = useRouter();
 const route = useRoute();
+const authStore = useAuthStore(); // 👈 2. Instanciation du store
 
-const userProfile = ref<any>(null);
+// Titre dynamique basé sur le nom de la route
+const pageTitle = computed(() => route.name?.toString() || 'Tableau de bord');
 
-// ✅ 1. Titre dynamique basé sur le nom de la route défini dans ton router
-const pageTitle = computed(() => route.name || 'Tableau de bord');
+// Initialiser l'authentification au montage du layout
+onMounted(() => {
+  authStore.initAuth();
+});
 
-// ✅ 2. Récupération simplifiée du profil (plus besoin de gérer les redirections ici)
-const fetchProfile = async () => {
-  try {
-    const user = await authService.getCurrentUser();
-    if (user) {
-      userProfile.value = {
-        fullName: user.user_metadata?.full_name || user.email,
-        email: user.email
-      };
-    }
-  } catch (error) {
-    console.error("Erreur profil:", error);
-  }
-};
-
-onMounted(fetchProfile);
-
-// ✅ 3. Déconnexion
+// Déconnexion
 const handleSignOut = async () => {
-  await authService.signOut();
+  await authStore.logout();
   router.push('/login');
 };
 </script>
@@ -57,7 +45,7 @@ const handleSignOut = async () => {
             <router-link to="/" class="cursor-pointer">
               <SidebarMenuButton size="lg" class="hover:bg-transparent">
                 <div class="grid flex-1 text-left text-sm leading-tight">
-                  <img src="/logo.png" alt="" width="100">
+                  <img src="/logo.png" alt="Logo" width="100" class="cursor-pointer" />
                 </div>
               </SidebarMenuButton>
             </router-link>
@@ -95,17 +83,10 @@ const handleSignOut = async () => {
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <SidebarMenuButton as-child>
-                  <router-link to="/dashboard/events"> <Calendar class="text-primary" />
+                <SidebarMenuButton as-child :is-active="route.path === '/dashboard/events'">
+                  <router-link to="/dashboard/events">
+                    <Calendar class="text-primary" />
                     <span>Mes événements</span>
-                  </router-link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              <SidebarMenuItem>
-                <SidebarMenuButton as-child>
-                  <router-link to="/dashboard/events/1/impression-billets"> <Ticket class="text-primary" />
-                    <span>Billetterie & Ventes</span>
                   </router-link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -120,13 +101,20 @@ const handleSignOut = async () => {
             <DropdownMenu>
               <DropdownMenuTrigger as-child>
                 <SidebarMenuButton class="py-7 border border-secondary/10 shadow-sm transition-all hover:bg-background">
-                  <User2 class="text-accent" /> 
-                  <div class="flex flex-col items-start overflow-hidden text-left">
+                  <!-- Affichage de l'avatar s'il existe, sinon l'icône par défaut -->
+                  <img 
+                    v-if="authStore.user?.avatarUrl" 
+                    :src="authStore.user.avatarUrl" 
+                    class="size-7 rounded-full object-cover shrink-0" 
+                  />
+                  <User2 v-else class="text-accent shrink-0" />
+
+                  <div class="flex flex-col items-start overflow-hidden text-left ml-2">
                     <span class="truncate font-bold text-primary leading-none mb-1">
-                      {{ userProfile?.fullName || 'Chargement...' }}
+                      {{ authStore.user?.fullName || 'Chargement...' }}
                     </span>
                     <span class="truncate text-[10px] text-secondary leading-none">
-                      {{ userProfile?.email }}
+                      {{ authStore.user?.email }}
                     </span>
                   </div>
                   <ChevronUp class="ml-auto opacity-50" />
@@ -151,17 +139,17 @@ const handleSignOut = async () => {
     </Sidebar>
 
     <SidebarInset>
-      <header class="flex h-16 shrink-0 items-center gap-2 px-6 border-b bg-white">
+      <header class="flex h-16 shrink-0 items-center gap-2 px-3 border-b bg-white">
         <SidebarTrigger class="-ml-1" />
         <Separator orientation="vertical" class="mx-2 h-4" />
         <div class="flex items-center gap-2 text-sm">
           <router-link to="/dashboard" class="text-primary/70 hover:text-primary hover:underline font-medium">Tableau de bord</router-link>
-           <ChevronRight />
+          <ChevronRight />
           <span class="font-bold text-primary">{{ pageTitle }}</span>
         </div>
       </header>
       
-      <main class="flex flex-1 flex-col gap-6 p-6 min-md:p-6 bg-background/50">
+      <main class="flex flex-1 flex-col gap-6 px-3 py-6 min-md:p-6 bg-background/50">
         <router-view />
       </main>
     </SidebarInset>

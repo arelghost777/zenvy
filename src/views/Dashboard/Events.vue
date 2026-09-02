@@ -4,7 +4,8 @@ import { computed, onMounted, ref } from 'vue'
 import {
   Calendar, MapPin, Ticket, MoreVertical, Plus, Search,
   Loader2, Globe, Tag, Pencil, Trash2, X, AlertTriangle, TicketCheck,
-  CalendarCheck
+  CalendarCheck,
+  Link
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Input }  from '@/components/ui/input'
@@ -206,7 +207,7 @@ onMounted(loadEvents)
             >
               <div
                 v-if="openMenuId === event.id"
-                class="absolute right-0 top-full mt-1 w-44 bg-white rounded-xl border border-primary/10 shadow-xl overflow-hidden z-20"
+                class="absolute right-0 top-full mt-1 w-44 bg-white rounded-xl border border-primary/10 shadow-xl overflow-hidden z-500"
               >
                 <router-link
                   :to="`/dashboard/events/${event.id}/edit`"
@@ -221,6 +222,13 @@ onMounted(loadEvents)
                   @click="closeAllMenus"
                 >
                   <CalendarCheck :size="14" class="text-primary/50" /> Voir l'évenement
+                </router-link>
+                <router-link
+                  :to="`/events/${event.id}`"
+                  class="flex items-center gap-2 px-4 py-2.5 text-sm text-primary hover:bg-primary/5 transition-colors"
+                  @click="closeAllMenus"
+                >
+                  <Link :size="14" class="text-primary/50" /> Copier le lien
                 </router-link>
                 <button
                   @click="confirmDelete(event)"

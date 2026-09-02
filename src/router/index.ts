@@ -1,139 +1,157 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { supabase } from '@/lib/clientSupabase'
+import { createRouter, createWebHistory } from "vue-router";
+import { supabase } from "@/lib/supabase/clientSupabase";
 // Import des vues
-import AuthLayout from '@/views/Layout/AuthLayout.vue'
-import DashboardLayout from '@/views/Layout/DashboardLayout.vue'
-import Login from '@/views/Auth/Login.vue'
-import SignUp from '@/views/Auth/SignUp.vue'
-import TableauDeBord from '@/views/Dashboard/Dashboard.vue'
-import CreateEvents from '@/views/Dashboard/CreateEvents.vue'
-import ImpressionBillets from '@/views/Dashboard/ImpressionBillets.vue'
-import Events from '@/views/Dashboard/Events.vue'
-import UpdateEvent from '@/views/Dashboard/UpdateEvent.vue'
-import Account from '@/views/Dashboard/Account.vue'
-import NotFound from '@/views/NotFound.vue'
-import Home from '@/views/Public/Home.vue'
-import EventDetails from '@/views/Public/EventDetails.vue'
-import Layout from '@/views/Layout/Layout.vue'
+import AuthLayout from "@/views/Layout/AuthLayout.vue";
+import DashboardLayout from "@/views/Layout/DashboardLayout.vue";
+import Login from "@/views/Auth/Login.vue";
+import SignUp from "@/views/Auth/SignUp.vue";
+import TableauDeBord from "@/views/Dashboard/Dashboard.vue";
+import CreateEvents from "@/views/Dashboard/CreateEvents.vue";
+import ImpressionBillets from "@/views/Dashboard/ImpressionBillets.vue";
+import Events from "@/views/Dashboard/Events.vue";
+import UpdateEvent from "@/views/Dashboard/UpdateEvent.vue";
+import Account from "@/views/Dashboard/Account.vue";
+import NotFound from "@/views/NotFound.vue";
+import Home from "@/views/Public/Home.vue";
+import EventDetails from "@/views/Public/EventDetails.vue";
+import Layout from "@/views/Layout/Layout.vue";
+import Checkout from "@/views/Public/Checkout.vue";
+import Scannerview from "@/views/Scannerview.vue";
 
 const routes = [
   // --- ROUTES PUBLIQUES (Landing Page) ---
-    {
-    path: '/',
+  {
+    path: "/",
     component: Layout,
     children: [
       {
-        path: '/',
-        name: 'Accueil',
+        path: "/",
+        name: "Accueil",
         component: Home,
       },
       {
-        path: '/events/:eventId',
-        name: 'Détails de l\'évenement',
+        path: "/events/:eventId",
+        name: "Détails de l'évenement",
         component: EventDetails,
       },
-    ]
-    },
-      
+      {
+        path: "/checkout/:eventId",
+        name: "Checkout",
+        component: Checkout,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "Scan",
+        name: "Scanner un billet",
+        component: Scannerview,
+      },
+    ],
+  },
 
   // --- ROUTES AUTHENTIFICATION (Layout dédié) ---
   {
-    path: '/auth',
+    path: "/auth",
     component: AuthLayout,
     children: [
       {
-        path: '/login',
-        name: 'Connexion',
+        path: "/login",
+        name: "Connexion",
         component: Login,
-        meta: { guestOnly: true }
+        meta: { guestOnly: true },
       },
       {
-        path: '/signup',
-        name: 'Inscription',
+        path: "/signup",
+        name: "Inscription",
         component: SignUp,
-        meta: { guestOnly: true }
-      }
-    ]
+        meta: { guestOnly: true },
+      },
+    ],
   },
 
   // --- ROUTES PRIVÉES (Dashboard Layout) ---
   {
-    path: '/dashboard', // Parent pour grouper les routes protégées
+    path: "/dashboard", // Parent pour grouper les routes protégées
     component: DashboardLayout,
     meta: { requiresAuth: true },
     children: [
       {
-        path: '/dashboard',
-        name: 'Tableau de bord',
+        path: "/dashboard",
+        name: "Tableau de bord",
         component: TableauDeBord,
       },
       {
-        path: '/dashboard/account',
-        name: 'Mon compte',
+        path: "/dashboard/account",
+        name: "Mon compte",
         component: Account,
       },
       {
-        path: '/dashboard/create-event',
-        name: 'Créer un événement',
+        path: "/dashboard/create-event",
+        name: "Créer un événement",
         component: CreateEvents,
       },
       {
-        path: '/dashboard/events/:id/impression-billets',
-        name: 'Impression des tickets',
+        path: "/dashboard/events/:id/impression-billets",
+        name: "Impression des tickets",
         component: ImpressionBillets,
       },
       {
-        path: '/dashboard/events',
-        name: 'Mes événements',
+        path: "/dashboard/events",
+        name: "Mes événements",
         component: Events,
       },
       {
-        path: '/dashboard/events/:id/edit',
-        name: 'Éditer un événement',
+        path: "/dashboard/events/:id/edit",
+        name: "Éditer un événement",
         component: UpdateEvent,
-      }
-    ]
+      },
+    ],
   },
 
   // Redirection par défaut si la page n'existe pas
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
     component: NotFound,
-    meta: { title: 'Page introuvable | Zenvy' }
-  }
-]
+    meta: { title: "Page introuvable | Zenvy" },
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
 /**
  * MIDDLEWARE DE PROTECTION DES ROUTES
  */
 router.beforeEach(async (to, _from, next) => {
   // 1. Récupération de la session via le client Supabase
-  const { data: { session } } = await supabase.auth.getSession()
-  const isAuthenticated = !!session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const isAuthenticated = !!session;
 
   // 2. Vérification de la hiérarchie des routes (certaines sont marquées en meta parent)
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  const isGuestOnly = to.matched.some(record => record.meta.guestOnly)
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isGuestOnly = to.matched.some((record) => record.meta.guestOnly);
 
   // Cas 1 : Accès à une page protégée sans être connecté
   if (requiresAuth && !isAuthenticated) {
-    return next({ name: 'Connexion' })
+    return next({ name: "Connexion" });
   }
 
   // Cas 2 : Accès à Login/SignUp/Home en étant déjà connecté
   // (Typiquement pour rediriger l'utilisateur vers son espace de gestion)
   if (isGuestOnly && isAuthenticated) {
-    return next({ name: 'Tableau de bord' })
+    return next({ name: "Tableau de bord" });
   }
 
   // Cas 3 : Tout est ok, on continue
-  next()
-})
+  next();
+});
 
-export default router
+export default router;
